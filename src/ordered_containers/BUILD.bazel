@@ -1,0 +1,16 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "segment_tree",
+    srcs = ["segment_tree.cpp"],
+    hdrs = ["segment_tree.h"]
+)
+
+cc_binary(
+    name = "benchmark_test",
+    srcs = ["main.cpp"],
+    deps = [
+        "@com_google_benchmark//:benchmark",
+        ":segment_tree",
+    ],
+)

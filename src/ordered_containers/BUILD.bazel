@@ -7,7 +7,7 @@ cc_library(
 )
 
 cc_binary(
-    name = "benchmark_test",
+    name = "ordered_containers",
     srcs = ["main.cpp"],
     deps = [
         "@com_google_benchmark//:benchmark",

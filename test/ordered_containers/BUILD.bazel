@@ -1,0 +1,9 @@
+cc_test(
+    name = "ordered_containers",
+    size = "small",
+    srcs = ["main.cpp"],
+    deps = [
+        "@googletest//:gtest",
+        "@googletest//:gtest_main",
+    ],
+)

@@ -1,16 +1,30 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 
 cc_library(
+    name = "stl_set",
+    srcs = ["stl_set.cpp"],
+    hdrs = [
+        "ordered_container.h",
+        "stl_set.h",
+    ],
+)
+
+cc_library(
     name = "segment_tree",
     srcs = ["segment_tree.cpp"],
-    hdrs = ["segment_tree.h"]
+    hdrs = [
+        "ordered_container.h",
+        "segment_tree.h",
+        "stl_set.h",
+    ],
 )
 
 cc_binary(
     name = "ordered_containers",
     srcs = ["main.cpp"],
     deps = [
-        "@com_google_benchmark//:benchmark",
         ":segment_tree",
+        ":stl_set",
+        "@google_benchmark//:benchmark",
     ],
 )

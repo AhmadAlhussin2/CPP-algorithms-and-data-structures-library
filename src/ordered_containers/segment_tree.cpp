@@ -1,60 +1,101 @@
 #include "segment_tree.h"
+#include <stdexcept>
 
-void SegTreeSum::add_val(int pos, int add, int cur, int st, int en)
+SegmentTreeSet::SegmentTreeSet(int size)
 {
-    if (st == en)
+    tree = std::vector<int>(4 * (size+1), 0);
+    _capacity = size;
+}
+
+int SegmentTreeSet::size() const
+{
+    return _size;
+}
+
+bool SegmentTreeSet::empty() const
+{
+    return _size == 0;
+}
+
+void SegmentTreeSet::clear()
+{
+    _size = 0;
+    tree = std::vector<int>(4 * _size, 0);
+}
+
+void SegmentTreeSet::update(int v,int tl,int tr, int pos, int val)
+{
+    if (tl == tr)
     {
-        seg[cur] += add;
-        return;
+      tree[v] = val;
+      return;
     }
-    int mid = ((st + en) >> 1);
+
+    int mid = (tl + tr) / 2;
     if (pos <= mid)
-        add_val(pos, add, cur << 1, st, mid);
+    {
+        update(v << 1, tl, mid, pos, val);
+    }
     else
-        add_val(pos, add, cur << 1 | 1, mid + 1, en);
-    seg[cur] = seg[cur << 1] + seg[cur << 1 | 1];
+    {
+        update(v << 1 | 1, mid + 1, tr, pos, val);
+    }
+    tree[v] = tree[v << 1] + tree[v << 1 | 1];
 }
 
-void SegTreeSum::add_val(int pos, int add) { add_val(pos, add, 1, 0, MAX); }
-
-void SegTreeSum::insert(int pos)
+int SegmentTreeSet::query(int v, int tl, int tr, int l, int r) const
 {
-    add_val(pos, 1, 1, 0, MAX);
-}
-
-void SegTreeSum::erase(int pos)
-{
-    add_val(pos, -1, 1, 0, MAX);
-}
-
-bool SegTreeSum::contain(int pos)
-{
-    return (query(pos, pos, 1, 0, MAX) > 0);
-}
-
-int SegTreeSum::query(int l, int r, int cur, int st, int en)
-{
-    if (l > en || r < st)
+    if (tl > r or tr < l)
+    {
         return 0;
-    if (l <= st && en <= r)
-        return seg[cur];
-    int mid = ((st + en) >> 1);
-    return query(l, r, cur << 1, st, mid) + query(l, r, cur << 1 | 1, mid + 1, en);
-}
-int SegTreeSum::query(int l, int r) { return query(l, r, 1, 0, MAX); }
+    }
+    if (tl >= l and tr <= r)
+    {
+        return tree[v];
+    }
 
-int SegTreeSum::kth(int l, int r, int k, int cur, int st, int en)
-{
-    if (r < st || l > en || k > seg[cur])
-        return -1;
-    if (st == en)
-        return st;
-    int mid = ((st + en) >> 1);
-    int ret = -1;
-    if (seg[cur << 1] >= k)
-        ret = kth(l, r, k, cur << 1, st, mid);
-    if (ret != -1)
-        return ret;
-    return kth(l, r, k - (int)seg[cur << 1], cur << 1 | 1, mid + 1, en);
+    int mid = (tl + tr) / 2;
+    return query(v << 1, tl, mid, l, r) + query(v << 1 | 1, mid + 1, tr, l, r);
 }
-int SegTreeSum::kth(int l, int r, int k) { return kth(l, r, k, 1, 0, MAX); }
+
+bool SegmentTreeSet::contains(const int& element) const
+{
+    return SegmentTreeSet::query(1, 0, _capacity-1, element, element) != 0;
+}
+
+void SegmentTreeSet::insert(const int& element)
+{
+    SegmentTreeSet::update(1, 0, _capacity-1, element, 1);
+}
+
+void SegmentTreeSet::remove(int key)
+{
+    SegmentTreeSet::update(1, 0, _capacity-1, key, 0);
+}
+
+
+int SegmentTreeSet::getTheKthElement(int v, int tl, int tr, int k) const
+{
+    if (tl == tr)
+    {
+        return tl;
+    }
+
+    int mid = (tl + tr) / 2;
+    if (tree[v << 1] <= k)
+    {
+        return getTheKthElement(v << 1, tl, mid, k);
+    }
+
+    return getTheKthElement(v << 1 | 1, mid + 1, tr, k - tree[v<<1]);
+}
+
+int SegmentTreeSet::getTheKthElement(int index) const
+{
+    if (tree[1] <= index)
+    {
+        throw std::out_of_range("index out of range");
+    }
+
+    return getTheKthElement(1, 0, _capacity-1, index);
+}

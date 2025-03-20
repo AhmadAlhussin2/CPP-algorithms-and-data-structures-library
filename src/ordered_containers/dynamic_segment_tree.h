@@ -1,3 +1,6 @@
+#ifndef DYNAMIC_SEGMENT_TREE_H
+#define DYNAMIC_SEGMENT_TREE_H
+
 #include <limits.h>
 #include "ordered_container.h"
 
@@ -69,3 +72,5 @@ public:
     void remove(int key);
     int getTheKthElement(int index) const;
 };
+
+#endif

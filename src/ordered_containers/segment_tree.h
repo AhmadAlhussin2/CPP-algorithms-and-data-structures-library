@@ -1,3 +1,6 @@
+#ifndef SEGMENT_TREE_H
+#define SEGMENT_TREE_H
+
 #include <vector>
 #include "ordered_container.h"
 
@@ -10,7 +13,7 @@ private:
     int getTheKthElement(int v, int tl, int tr, int k) const;
 
 public:
-    SegmentTreeSet(int size);
+    SegmentTreeSet(int size = (1 << 20));
     int size() const;
     bool empty() const;
     void clear();
@@ -19,3 +22,5 @@ public:
     void remove(int key);
     int getTheKthElement(int index) const;
 };
+
+#endif

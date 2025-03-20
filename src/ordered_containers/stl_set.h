@@ -1,8 +1,8 @@
-#include <set>
-#include "ordered_container.h"
-
 #ifndef STL_SET_H
 #define STL_SET_H
+
+#include <set>
+#include "ordered_container.h"
 
 template<typename T>
 class Set : public OrderedContainer<T> {

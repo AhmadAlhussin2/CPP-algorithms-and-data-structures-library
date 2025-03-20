@@ -1,8 +1,10 @@
 #include <benchmark/benchmark.h>
 #include <chrono>
 #include <random>
+#include <type_traits>
 #include <vector>
 #include "dynamic_segment_tree.h"
+#include "ordered_container.h"
 #include "segment_tree.h"
 #include "stl_set.h"
 #include "trie_int.h"
@@ -13,78 +15,54 @@ int getRand(int l, int r) {
     return uid(rng);
 }
 
-static void BM_IntegerSet(benchmark::State &state) {
-    std::vector<int> vec(state.range(0));
-    for (auto &v: vec)
-        v = getRand(0, (1 << 20));
+template<class T>
+static void BM_OrderedContainer(benchmark::State &state) {
+    static_assert(std::is_base_of<OrderedContainer<int>, T>::value, "should be derived from ordered container class");
 
-    for (auto _: state) {
-        Set<int> st;
-        for (auto &v: vec) {
-            if (st.contains(v))
-                st.remove(v);
-            else
-                st.insert(v);
-        }
+    std::vector<int> vec(state.range(0));
+    for (auto &v: vec) {
+        v = getRand(0, (1 << 20));
     }
-}
-// Register the function as a benchmark
-BENCHMARK(BM_IntegerSet)->Unit(benchmark::kMillisecond)->Arg((1 << 5))->Arg((1 << 10))->Arg((1 << 18));
-
-
-static void BM_IntegerSegmentTree(benchmark::State &state) {
-    std::vector<int> vec(state.range(0));
-    for (auto &v: vec)
-        v = getRand(0, (1 << 20));
 
     for (auto _: state) {
-        SegmentTreeSet st((1 << 20));
+        T ordered_container;
         for (auto &v: vec) {
-            if (st.contains(v))
-                st.remove(v);
-            else
-                st.insert(v);
+            if (ordered_container.contains(v)) {
+                ordered_container.remove(v);
+            } else {
+                ordered_container.insert(v);
+            }
         }
     }
 }
 
-BENCHMARK(BM_IntegerSegmentTree)->Unit(benchmark::kMillisecond)->Arg((1 << 5))->Arg((1 << 10))->Arg((1 << 18));
+BENCHMARK(BM_OrderedContainer<Set<int>>)
+        ->Name("Integers set")
+        ->Unit(benchmark::kMillisecond)
+        ->Arg((1 << 5))
+        ->Arg((1 << 10))
+        ->Arg((1 << 18));
 
-static void BM_IntegerTrie(benchmark::State &state) {
-    std::vector<int> vec(state.range(0));
-    for (auto &v: vec)
-        v = getRand(0, (1 << 20));
+BENCHMARK(BM_OrderedContainer<SegmentTreeSet>)
+        ->Name("Segment tree")
+        ->Unit(benchmark::kMillisecond)
+        ->Arg((1 << 5))
+        ->Arg((1 << 10))
+        ->Arg((1 << 18));
 
-    for (auto _: state) {
-        TrieInt st;
-        for (auto &v: vec) {
-            if (st.contains(v))
-                st.remove(v);
-            else
-                st.insert(v);
-        }
-    }
-}
-// Register the function as a benchmark
-BENCHMARK(BM_IntegerTrie)->Unit(benchmark::kMillisecond)->Arg((1 << 5))->Arg((1 << 10))->Arg((1 << 18));
+BENCHMARK(BM_OrderedContainer<DynamicSegmentTree>)
+        ->Name("Dynamic segment tree")
+        ->Unit(benchmark::kMillisecond)
+        ->Arg((1 << 5))
+        ->Arg((1 << 10))
+        ->Arg((1 << 18));
 
-static void BM_DynamicSegmentTree(benchmark::State &state) {
-    std::vector<int> vec(state.range(0));
-    for (auto &v: vec)
-        v = getRand(0, (1 << 20));
-
-    for (auto _: state) {
-        DynamicSegmentTree st;
-        for (auto &v: vec) {
-            if (st.contains(v))
-                st.remove(v);
-            else
-                st.insert(v);
-        }
-    }
-}
-// Register the function as a benchmark
-BENCHMARK(BM_DynamicSegmentTree)->Unit(benchmark::kMillisecond)->Arg((1 << 5))->Arg((1 << 10))->Arg((1 << 18));
+BENCHMARK(BM_OrderedContainer<TrieInt>)
+        ->Name("Integers trie")
+        ->Unit(benchmark::kMillisecond)
+        ->Arg((1 << 5))
+        ->Arg((1 << 10))
+        ->Arg((1 << 18));
 
 
 BENCHMARK_MAIN();

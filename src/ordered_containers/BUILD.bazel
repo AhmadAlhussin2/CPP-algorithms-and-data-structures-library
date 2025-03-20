@@ -10,6 +10,24 @@ cc_library(
 )
 
 cc_library(
+    name = "trie_int",
+    srcs = ["trie_int.cpp"],
+    hdrs = [
+        "ordered_container.h",
+        "trie_int.h"
+    ]
+)
+
+cc_library(
+    name = "dynamic_segment_tree",
+    srcs = ["dynamic_segment_tree.cpp"],
+    hdrs = [
+        "ordered_container.h",
+        "dynamic_segment_tree.h"
+    ]
+)
+
+cc_library(
     name = "segment_tree",
     srcs = ["segment_tree.cpp"],
     hdrs = [
@@ -25,6 +43,8 @@ cc_binary(
     deps = [
         ":segment_tree",
         ":stl_set",
+        ":trie_int",
+        ":dynamic_segment_tree",
         "@google_benchmark//:benchmark",
     ],
 )

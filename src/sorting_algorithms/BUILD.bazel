@@ -1,0 +1,29 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "heap_sort",
+    srcs = ["heap_sort.cpp"],
+    hdrs = [
+        "heap_sort.h",
+        "sorting_algorithm.h",
+    ],
+)
+
+cc_library(
+    name = "stl_sort",
+    srcs = ["stl_sort.cpp"],
+    hdrs = [
+        "sorting_algorithm.h",
+        "stl_sort.h",
+    ],
+)
+
+cc_binary(
+    name = "sorting_algorithms",
+    srcs = ["main.cpp"],
+    deps = [
+        ":heap_sort",
+        ":stl_sort",
+        "@google_benchmark//:benchmark",
+    ],
+)

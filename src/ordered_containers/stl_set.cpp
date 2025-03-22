@@ -28,7 +28,7 @@ void Set<T>::insert(const T &key) {
 }
 
 template<typename T>
-void Set<T>::remove(int key) {
+void Set<T>::remove(T key) {
     elements.erase(key);
 }
 
@@ -44,3 +44,4 @@ T Set<T>::getTheKthElement(int index) const {
     }
     return *it;
 }
+

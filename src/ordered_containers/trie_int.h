@@ -1,8 +1,8 @@
-#include <vector>
-#include "ordered_container.h"
-
 #ifndef TRIE_INT_H
 #define TRIE_INT_H
+
+#include <vector>
+#include "ordered_container.h"
 
 class TrieInt : public OrderedContainer<int> {
 private:

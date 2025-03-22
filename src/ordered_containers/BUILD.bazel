@@ -28,23 +28,26 @@ cc_library(
 )
 
 cc_library(
-    name = "segment_tree",
-    srcs = ["segment_tree.cpp"],
+    name = "boost_set",
+    srcs = ["boost_set.cpp"],
     hdrs = [
         "ordered_container.h",
-        "segment_tree.h",
-        "stl_set.h",
+        "boost_set.h"
     ],
+    deps = [
+        "@boost.container"
+    ]
 )
 
 cc_binary(
     name = "ordered_containers",
     srcs = ["main.cpp"],
     deps = [
-        ":segment_tree",
         ":stl_set",
         ":trie_int",
         ":dynamic_segment_tree",
         "@google_benchmark//:benchmark",
+        "//src/ordered_containers/generators:generators",
+        ":boost_set"
     ],
 )

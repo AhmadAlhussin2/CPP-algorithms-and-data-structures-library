@@ -1,13 +1,13 @@
-#ifndef STL_SET_H
-#define STL_SET_H
+#ifndef BOOST_SET_H
+#define BOOST_SET_H
 
-#include <set>
+#include <boost/container/flat_set.hpp>
 #include "ordered_container.h"
 
 template<typename T>
-class Set : public OrderedContainer<T> {
+class BoostSet : public OrderedContainer<T> {
 private:
-    std::set<T> elements;
+    boost::container::flat_set<T> elements;
 
 public:
     int size() const;
@@ -19,5 +19,6 @@ public:
     T getTheKthElement(int index) const;
 };
 
-template class Set<int>;
-#endif // STL_SET_H
+template class BoostSet<int>;
+
+#endif

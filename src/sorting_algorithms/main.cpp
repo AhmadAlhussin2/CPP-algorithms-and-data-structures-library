@@ -4,6 +4,7 @@
 #include <random>
 
 #include "heap_sort.h"
+#include "radix_sort.h"
 #include "stl_sort.h"
 
 
@@ -35,5 +36,16 @@ static void BM_STLSort(benchmark::State& state) {
 // Register the function as a benchmark
 BENCHMARK(BM_STLSort)->Unit(benchmark::kMillisecond)->Arg((1<<5))->Arg((1<<10))->Arg((1<<22));
 
+
+static void BM_RadixSort(benchmark::State& state) {
+    std::vector<int> vec(state.range(0));
+    for(auto &v:vec) v = getRand(0,(1<<20));
+    for(auto _: state) {
+        auto sorter = RadixSort();
+        sorter.sort(vec);
+    }
+}
+// Register the function as a benchmark
+BENCHMARK(BM_RadixSort)->Unit(benchmark::kMillisecond)->Arg((1<<5))->Arg((1<<10))->Arg((1<<22));
 
 BENCHMARK_MAIN();

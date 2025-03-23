@@ -18,11 +18,21 @@ cc_library(
     ],
 )
 
+cc_library(
+    name = "radix_sort",
+    srcs = ["radix_sort.cpp"],
+    hdrs = [
+        "radix_sort.h",
+        "sorting_algorithm.h",
+    ],
+)
+
 cc_binary(
     name = "sorting_algorithms",
     srcs = ["main.cpp"],
     deps = [
         ":heap_sort",
+        ":radix_sort",
         ":stl_sort",
         "@google_benchmark//:benchmark",
     ],

@@ -7,6 +7,8 @@ cc_library(
         "ordered_container.h",
         "stl_set.h",
     ],
+    visibility = ["//visibility:public"],
+    includes = ["."]
 )
 
 cc_library(
@@ -15,7 +17,9 @@ cc_library(
     hdrs = [
         "ordered_container.h",
         "trie_int.h"
-    ]
+    ],
+    visibility = ["//visibility:public"],
+    includes = ["."]
 )
 
 cc_library(
@@ -24,7 +28,9 @@ cc_library(
     hdrs = [
         "ordered_container.h",
         "dynamic_segment_tree.h"
-    ]
+    ],
+    visibility = ["//visibility:public"],
+    includes = ["."]
 )
 
 cc_library(
@@ -36,7 +42,18 @@ cc_library(
     ],
     deps = [
         "@boost.container"
-    ]
+    ],
+    visibility = ["//visibility:public"],
+    includes = ["."]
+)
+
+cc_library(
+    name = "ordered_container",
+    hdrs = [
+        "ordered_container.h",
+    ],
+    visibility = ["//visibility:public"],
+    includes = ["."]
 )
 
 cc_binary(
@@ -50,4 +67,6 @@ cc_binary(
         "//src/ordered_containers/generators:generators",
         ":boost_set"
     ],
+    includes = ["."],
+    visibility = ["//visibility:public"]
 )

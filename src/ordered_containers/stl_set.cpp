@@ -39,7 +39,7 @@ T Set<T>::getTheKthElement(int index) const {
     }
 
     auto it = elements.begin();
-    for (int i = 1; i < index; i++) {
+    for (int i = 1; i <= index; i++) {
         it++;
     }
     return *it;

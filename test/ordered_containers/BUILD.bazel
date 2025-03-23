@@ -5,5 +5,9 @@ cc_test(
     deps = [
         "@googletest//:gtest",
         "@googletest//:gtest_main",
+        "//src/ordered_containers:stl_set",
+        "//src/ordered_containers:trie_int",
+        "//src/ordered_containers:dynamic_segment_tree",
+        "//src/ordered_containers:ordered_container"
     ],
 )

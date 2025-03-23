@@ -10,15 +10,15 @@
 #include "generators/reversed_int_generator.h"
 #include "boost_set.h"
 
-template<class T, class TGenerator>
+template<class TContainer, class TGenerator>
 static void BM_OrderedContainer(benchmark::State &state) {
-    static_assert(std::is_base_of<OrderedContainer<int>, T>::value, "should be derived from ordered container class");
+    static_assert(std::is_base_of<OrderedContainer<int>, TContainer>::value, "should be derived from ordered container class");
 
     for (auto _: state) {
         state.PauseTiming();
         std::vector<int> vec = TGenerator::generate(state.range(0));
         state.ResumeTiming();
-        T ordered_container;
+        TContainer ordered_container;
         for (auto &v: vec) {
             if (ordered_container.contains(v)) {
                 ordered_container.remove(v);

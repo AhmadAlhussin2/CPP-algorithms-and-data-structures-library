@@ -9,4 +9,11 @@ struct RandomDataGenerator
     static std::vector<int> generate(int size, int min_value = INT_MIN, int max_value = INT_MAX);
 };
 
+template<typename TResult>
+class DataGenerator 
+{
+public:
+    static std::vector<TResult> generate(int count);
+};
+
 #endif

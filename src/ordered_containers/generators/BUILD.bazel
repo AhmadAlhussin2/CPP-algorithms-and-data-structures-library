@@ -1,7 +1,15 @@
 cc_library(
     name = "generators",
-    srcs = ["random_int_generator.cpp", "reversed_int_generator.cpp"],
-    hdrs = ["random_int_generator.h", "reversed_int_generator.h"],
+    srcs = [
+        "random_int_generator.cpp",
+        "reversed_int_generator.cpp",
+        "sorted_int_generator.cpp",
+    ],
+    hdrs = [
+        "random_int_generator.h",
+        "reversed_int_generator.h",
+        "sorted_int_generator.h",
+    ],
     includes = ["."],
-    visibility = ["//visibility:public"]
+    visibility = ["//visibility:public"],
 )

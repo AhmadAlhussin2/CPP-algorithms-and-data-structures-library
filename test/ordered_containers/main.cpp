@@ -1,8 +1,8 @@
-#include "dynamic_segment_tree.h"
 #include "gtest/gtest.h"
-#include "ordered_container.h"
-#include "stl_set.h"
-#include "trie_int.h"
+#include "src/ordered_containers/stl_set.h"
+#include "src/ordered_containers/dynamic_segment_tree.h"
+#include "src/ordered_containers/trie_int.h"
+
 
 template<typename OrderedContainer>
 void test_int_ordered_containers(int count) {

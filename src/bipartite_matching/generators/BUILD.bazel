@@ -1,0 +1,13 @@
+cc_library(
+    name = "generators",
+    srcs = [
+        "dense_bipartite_graph_generator.cpp",
+        "random_bipartite_graph_generator.cpp",
+    ],
+    hdrs = [
+        "dense_bipartite_graph_generator.h",
+        "random_bipartite_graph_generator.h",
+    ],
+    visibility = ["//visibility:public"],
+    deps = ["//src/graph"],
+)

@@ -11,6 +11,10 @@ private:
         int left = 0, right = 0;
         int sum = 0;
         Node() = default;
+        ~Node() {
+            delete left_child;
+            delete right_child;
+        }
 
         Node(const int left, const int right) : left(left), right(right) {}
 
@@ -64,6 +68,9 @@ private:
 
 public:
     DynamicSegmentTree();
+    ~DynamicSegmentTree() override {
+        delete root;
+    }
     int size() const;
     bool empty() const;
     void clear();

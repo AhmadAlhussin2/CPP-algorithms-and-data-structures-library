@@ -26,6 +26,9 @@ private:
 
 public:
     TrieInt();
+    ~TrieInt() override {
+        delete root;
+    }
     int size() const;
     bool empty() const;
     void clear();

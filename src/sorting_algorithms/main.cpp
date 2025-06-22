@@ -18,7 +18,7 @@
 
 const int STR_MIN = (1<<15);
 const int STR_MAX = (1<<21);
-const int MIN_INT = (1<<14);
+const int MIN_INT = (1<<20);
 const int MAX_INT = (1<<24);
 
 template<class TSortingAlgorithm, class TGenerator>
@@ -38,47 +38,47 @@ static void BM_IntegerSortingAlgorithms(benchmark::State& state) {
 BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, HeapSort<int>, RandomIntegerListGenerator)
         ->Name("Integer Heap-Sort Random-Integer-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(2)->Range(MIN_INT, MAX_INT);
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
 
 BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, HeapSort<int>, SemiSortedIntegerListGenerator)
         ->Name("Integer Heap-Sort Semi-Sorted-Integer-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(2)->Range(MIN_INT, MAX_INT);
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
 
 BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, HeapSort<int>, ReversedIntegerListGenerator)
         ->Name("Integer Heap-Sort Reversed-Integer-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(2)->Range(MIN_INT, MAX_INT);
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
 
 BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, RadixSort, RandomIntegerListGenerator)
         ->Name("Integer Radix-Sort Random-Integer-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(2)->Range(MIN_INT, MAX_INT);
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
 
 BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, RadixSort, SemiSortedIntegerListGenerator)
         ->Name("Integer Radix-Sort Semi-Sorted-Integer-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(2)->Range(MIN_INT, MAX_INT);
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
 
 BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, RadixSort, ReversedIntegerListGenerator)
         ->Name("Integer Radix-Sort Reversed-Integer-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(2)->Range(MIN_INT, MAX_INT);
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
 
 BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, STLSort<int>, RandomIntegerListGenerator)
         ->Name("Integer Standard-Sort Random-Integer-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(2)->Range(MIN_INT, MAX_INT);
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
 
 BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, STLSort<int>, SemiSortedIntegerListGenerator)
         ->Name("Integer Standard-Sort Semi-Sorted-Integer-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(2)->Range(MIN_INT, MAX_INT);
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
 
 BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, STLSort<int>, ReversedIntegerListGenerator)
         ->Name("Integer Standard-Sort Reversed-Integer-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(2)->Range(MIN_INT, MAX_INT);
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
 
 
 template<class TSortingAlgorithm, class TGenerator>

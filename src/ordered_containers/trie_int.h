@@ -13,6 +13,11 @@ private:
             children[0] = children[1] = nullptr;
             sum = 0;
         }
+        ~Node() {
+            delete children[0];
+            delete children[1];
+            children[0]=children[1]=nullptr;
+        }
     };
     Node *root;
     const int MAX_BITS_SIZE = 30;

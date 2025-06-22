@@ -4,13 +4,21 @@ import re
 from collections import defaultdict
 import itertools
 import os
+import sys
+
 
 os.makedirs("charts", exist_ok=True)
 
-category = 'sorting'
+
+if len(sys.argv) != 2:
+    print(f"Usage: {sys.argv[0]} <filename>")
+    sys.exist(1)
+
+
+category = sys.argv[1]
 
 # Load the JSON file
-with open(f"json_results/{category}_results.json") as f:
+with open(f"json_results/{category}.json") as f:
     benchmarks = json.load(f)
 
 # Data structure: {data_type: {variation: {algorithm: [(input_size, time), ...]}}}

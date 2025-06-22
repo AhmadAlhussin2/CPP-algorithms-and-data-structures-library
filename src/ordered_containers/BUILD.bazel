@@ -7,8 +7,8 @@ cc_library(
         "ordered_container.h",
         "stl_set.h",
     ],
+    includes = ["."],
     visibility = ["//visibility:public"],
-    includes = ["."]
 )
 
 cc_library(
@@ -16,35 +16,35 @@ cc_library(
     srcs = ["trie_int.cpp"],
     hdrs = [
         "ordered_container.h",
-        "trie_int.h"
+        "trie_int.h",
     ],
+    includes = ["."],
     visibility = ["//visibility:public"],
-    includes = ["."]
 )
 
 cc_library(
     name = "dynamic_segment_tree",
     srcs = ["dynamic_segment_tree.cpp"],
     hdrs = [
+        "dynamic_segment_tree.h",
         "ordered_container.h",
-        "dynamic_segment_tree.h"
     ],
+    includes = ["."],
     visibility = ["//visibility:public"],
-    includes = ["."]
 )
 
 cc_library(
     name = "boost_set",
     srcs = ["boost_set.cpp"],
     hdrs = [
+        "boost_set.h",
         "ordered_container.h",
-        "boost_set.h"
     ],
-    deps = [
-        "@boost.container"
-    ],
+    includes = ["."],
     visibility = ["//visibility:public"],
-    includes = ["."]
+    deps = [
+        "@boost.container",
+    ],
 )
 
 cc_library(
@@ -52,21 +52,22 @@ cc_library(
     hdrs = [
         "ordered_container.h",
     ],
+    includes = ["."],
     visibility = ["//visibility:public"],
-    includes = ["."]
 )
 
 cc_binary(
     name = "ordered_containers",
     srcs = ["main.cpp"],
+    includes = ["."],
+    linkopts = ["-Wl,-z,stack-size=67108864"],
+    visibility = ["//visibility:public"],
     deps = [
+        ":boost_set",
+        ":dynamic_segment_tree",
         ":stl_set",
         ":trie_int",
-        ":dynamic_segment_tree",
+        "//src/ordered_containers/generators",
         "@google_benchmark//:benchmark",
-        "//src/ordered_containers/generators:generators",
-        ":boost_set"
     ],
-    includes = ["."],
-    visibility = ["//visibility:public"]
 )

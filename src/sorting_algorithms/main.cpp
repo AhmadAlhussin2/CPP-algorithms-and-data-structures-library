@@ -16,6 +16,10 @@
 #include "generators/semi_sorted_string_list_generator.h"
 #include "generators/string_list_generator.h"
 
+const int STR_MIN = (1<<15);
+const int STR_MAX = (1<<21);
+const int MIN_INT = (1<<20);
+const int MAX_INT = (1<<24);
 
 template<class TSortingAlgorithm, class TGenerator>
 static void BM_IntegerSortingAlgorithms(benchmark::State& state) {
@@ -31,59 +35,50 @@ static void BM_IntegerSortingAlgorithms(benchmark::State& state) {
     state.SetComplexityN(state.range(0));
 }
 
-// BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, HeapSort<int>, RandomIntegerListGenerator)
-//         ->Name("Integer Heap Sort with Random Integer List")
-//         ->Unit(benchmark::kMillisecond)
-//         ->RangeMultiplier(10)->Range(10'000, 10'000'000)
-//         ->Complexity(benchmark::oN);
-//
-// BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, HeapSort<int>, SemiSortedIntegerListGenerator)
-//         ->Name("Integer Heap Sort with Semi Sorted Integer List")
-//         ->Unit(benchmark::kMillisecond)
-//         ->RangeMultiplier(10)->Range(10'000, 10'000'000)
-//         ->Complexity(benchmark::oN);
-//
-// BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, HeapSort<int>, ReversedIntegerListGenerator)
-//         ->Name("Integer Heap Sort with Reversed Integer List")
-//         ->Unit(benchmark::kMillisecond)
-//         ->RangeMultiplier(10)->Range(10'000, 10'000'000)
-//         ->Complexity(benchmark::oN);
-//
-// BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, RadixSort, RandomIntegerListGenerator)
-//         ->Name("Integer Radix Sort with Random Integer List")
-//         ->Unit(benchmark::kMillisecond)
-//         ->RangeMultiplier(10)->Range(10'000, 10'000'000)
-//         ->Complexity(benchmark::oN);
-//
-// BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, RadixSort, SemiSortedIntegerListGenerator)
-//         ->Name("Integer Radix Sort with Semi Sorted Integer List")
-//         ->Unit(benchmark::kMillisecond)
-//         ->RangeMultiplier(10)->Range(10'000, 10'000'000)
-//         ->Complexity(benchmark::oN);
-//
-// BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, RadixSort, ReversedIntegerListGenerator)
-//         ->Name("Integer Radix Sort with Reversed Integer List")
-//         ->Unit(benchmark::kMillisecond)
-//         ->RangeMultiplier(10)->Range(10'000, 10'000'000)
-//         ->Complexity(benchmark::oN);
-//
-// BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, STLSort<int>, RandomIntegerListGenerator)
-//         ->Name("Integer Standard Sort with Random Integer List")
-//         ->Unit(benchmark::kMillisecond)
-//         ->RangeMultiplier(10)->Range(10'000, 10'000'000)
-//         ->Complexity(benchmark::oN);
-//
-// BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, STLSort<int>, SemiSortedIntegerListGenerator)
-//         ->Name("Integer Standard Sort with Semi Sorted Integer List")
-//         ->Unit(benchmark::kMillisecond)
-//         ->RangeMultiplier(10)->Range(10'000, 10'000'000)
-//         ->Complexity(benchmark::oN);
-//
-// BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, STLSort<int>, ReversedIntegerListGenerator)
-//         ->Name("Integer Standard Sort with Reversed Integer List")
-//         ->Unit(benchmark::kMillisecond)
-//         ->RangeMultiplier(10)->Range(10'000, 10'000'000)
-//         ->Complexity(benchmark::oN);
+BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, HeapSort<int>, RandomIntegerListGenerator)
+        ->Name("Integer Heap-Sort Random-Integer-List")
+        ->Unit(benchmark::kMillisecond)
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
+
+BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, HeapSort<int>, SemiSortedIntegerListGenerator)
+        ->Name("Integer Heap-Sort Semi-Sorted-Integer-List")
+        ->Unit(benchmark::kMillisecond)
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
+
+BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, HeapSort<int>, ReversedIntegerListGenerator)
+        ->Name("Integer Heap-Sort Reversed-Integer-List")
+        ->Unit(benchmark::kMillisecond)
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
+
+BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, RadixSort, RandomIntegerListGenerator)
+        ->Name("Integer Radix-Sort Random-Integer-List")
+        ->Unit(benchmark::kMillisecond)
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
+
+BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, RadixSort, SemiSortedIntegerListGenerator)
+        ->Name("Integer Radix-Sort Semi-Sorted-Integer-List")
+        ->Unit(benchmark::kMillisecond)
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
+
+BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, RadixSort, ReversedIntegerListGenerator)
+        ->Name("Integer Radix-Sort Reversed-Integer-List")
+        ->Unit(benchmark::kMillisecond)
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
+
+BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, STLSort<int>, RandomIntegerListGenerator)
+        ->Name("Integer Standard-Sort Random-Integer-List")
+        ->Unit(benchmark::kMillisecond)
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
+
+BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, STLSort<int>, SemiSortedIntegerListGenerator)
+        ->Name("Integer Standard-Sort Semi-Sorted-Integer-List")
+        ->Unit(benchmark::kMillisecond)
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
+
+BENCHMARK_TEMPLATE(BM_IntegerSortingAlgorithms, STLSort<int>, ReversedIntegerListGenerator)
+        ->Name("Integer Standard-Sort Reversed-Integer-List")
+        ->Unit(benchmark::kMillisecond)
+        ->DenseRange(MIN_INT,MAX_INT,MIN_INT);
 
 
 template<class TSortingAlgorithm, class TGenerator>
@@ -101,40 +96,34 @@ static void BM_StringSortingAlgorithms(benchmark::State& state) {
 }
 
 BENCHMARK_TEMPLATE(BM_StringSortingAlgorithms, STLSort<std::string>, RandomStringListGenerator)
-        ->Name("String Standard Sort with Random String List")
+        ->Name("String Standard-Sort Random-String-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(10)->Range(10'0000, 1'000'000)
-        ->Complexity(benchmark::oN);
+        ->RangeMultiplier(2)->Range(STR_MIN, STR_MAX);
 
 BENCHMARK_TEMPLATE(BM_StringSortingAlgorithms, HeapSort<std::string>, RandomStringListGenerator)
-        ->Name("String Heap Sort with Random String List")
+        ->Name("String Heap-Sort Random-String-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(10)->Range(10'0000, 1'000'000)
-        ->Complexity(benchmark::oN);
+        ->RangeMultiplier(2)->Range(STR_MIN, STR_MAX);
 
 BENCHMARK_TEMPLATE(BM_StringSortingAlgorithms, STLSort<std::string>, SemiSortedStringListGenerator)
-        ->Name("String Standard Sort with Semi Sorted String List")
+        ->Name("String Standard-Sort Semi-Sorted-String-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(10)->Range(10'0000, 1'000'000)
-        ->Complexity(benchmark::oN);
+        ->RangeMultiplier(2)->Range(STR_MIN, STR_MAX);
 
 BENCHMARK_TEMPLATE(BM_StringSortingAlgorithms, HeapSort<std::string>, SemiSortedStringListGenerator)
-        ->Name("String Heap Sort with Semi Sorted String List")
+        ->Name("String Heap-Sort Semi-Sorted-String-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(10)->Range(10'0000, 1'000'000)
-        ->Complexity(benchmark::oN);
+        ->RangeMultiplier(2)->Range(STR_MIN, STR_MAX);
 
 BENCHMARK_TEMPLATE(BM_StringSortingAlgorithms, STLSort<std::string>, ReversedStringListGenerator)
-        ->Name("String Standard Sort with Reversed String List")
+        ->Name("String Standard-Sort Reversed-String-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(10)->Range(10'0000, 1'000'000)
-        ->Complexity(benchmark::oN);
+        ->RangeMultiplier(2)->Range(STR_MIN, STR_MAX);
 
 BENCHMARK_TEMPLATE(BM_StringSortingAlgorithms, HeapSort<std::string>, ReversedStringListGenerator)
-        ->Name("String Heap Sort with Reversed String List")
+        ->Name("String Heap-Sort Reversed-String-List")
         ->Unit(benchmark::kMillisecond)
-        ->RangeMultiplier(10)->Range(10'0000, 1'000'000)
-        ->Complexity(benchmark::oN);
+        ->RangeMultiplier(2)->Range(STR_MIN, STR_MAX);
 
 
 BENCHMARK_MAIN();

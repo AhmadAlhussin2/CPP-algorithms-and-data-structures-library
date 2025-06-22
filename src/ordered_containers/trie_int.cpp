@@ -2,6 +2,8 @@
 
 TrieInt::TrieInt() { root = new Node(); }
 
+
+
 int TrieInt::size() const { return root->sum; }
 
 bool TrieInt::empty() const { return root->sum == 0; }

@@ -81,7 +81,7 @@ static void BM_OrderedContainer(benchmark::State &state) {
 //     ->Args({1 << 18, 1 << 18});
 
 BENCHMARK_TEMPLATE(BM_OrderedContainer, Dinic, DenseBipartiteGraphGenerator)
-    ->Name("Dinic (dense bipartite graph)")
+    ->Name("Integer Dinic Dense-Bipartite-Graph")
     ->Unit(benchmark::kMillisecond)
     ->Args({1 << 5, 1 << 5})
     ->Args({1 << 6, 1 << 6})
@@ -95,7 +95,7 @@ BENCHMARK_TEMPLATE(BM_OrderedContainer, Dinic, DenseBipartiteGraphGenerator)
 
 BENCHMARK_TEMPLATE(BM_OrderedContainer, EdmondsCarp,
                    DenseBipartiteGraphGenerator)
-    ->Name("Edmonds Carp (dense bipartite graph)")
+    ->Name("Integer Edmonds-Carp Dense-Bipartite-Graph")
     ->Unit(benchmark::kMillisecond)
     ->Args({1 << 5, 1 << 5})
     ->Args({1 << 6, 1 << 6})
@@ -107,7 +107,7 @@ BENCHMARK_TEMPLATE(BM_OrderedContainer, EdmondsCarp,
 
 BENCHMARK_TEMPLATE(BM_OrderedContainer, HopcroftKarp,
                    DenseBipartiteGraphGenerator)
-    ->Name("Hopcroft (dense bipartite graph)")
+    ->Name("Integer Hopcroft Dense-Bipartite-Graph")
     ->Unit(benchmark::kMillisecond)
     ->Args({1 << 5, 1 << 5})
     ->Args({1 << 6, 1 << 6})
@@ -122,7 +122,7 @@ BENCHMARK_TEMPLATE(BM_OrderedContainer, HopcroftKarp,
 
 BENCHMARK_TEMPLATE(BM_OrderedContainer, BoostEdmondsKarp,
                    DenseBipartiteGraphGenerator)
-    ->Name("Boost Edmonds Carp (dense bipartite graph)")
+    ->Name("Integer Boost-Edmonds-Carp Dense-Bipartite-Graph")
     ->Unit(benchmark::kMillisecond)
     ->Args({1 << 5, 1 << 5})
     ->Args({1 << 6, 1 << 6})
@@ -133,7 +133,7 @@ BENCHMARK_TEMPLATE(BM_OrderedContainer, BoostEdmondsKarp,
 
 BENCHMARK_TEMPLATE(BM_OrderedContainer, BoostPushRelabel,
                    DenseBipartiteGraphGenerator)
-    ->Name("Boost Push Relabel (dense bipartite graph)")
+    ->Name("Integer Boost-Push-Relabel Dense-Bipartite-Graph")
     ->Unit(benchmark::kMillisecond)
     ->Args({1 << 5, 1 << 5})
     ->Args({1 << 6, 1 << 6})

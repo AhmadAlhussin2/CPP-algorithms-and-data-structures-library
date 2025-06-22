@@ -1,0 +1,69 @@
+cc_library(
+    name = "dinic",
+    srcs = ["dinic.cpp"],
+    hdrs = [
+        "dinic.h",
+    ],
+    deps = [
+        "//src/graph",
+    ],
+)
+
+cc_library(
+    name = "edmonds_karp",
+    srcs = ["edmonds_karp.cpp"],
+    hdrs = ["edmonds_karp.h"],
+    deps = ["//src/graph"],
+)
+
+cc_library(
+    name = "hocroft_karp",
+    srcs = ["hopcroft_karp.cpp"],
+    hdrs = ["hopcroft_karp.h"],
+    deps = ["//src/graph"],
+)
+
+cc_library(
+    name = "boost_edmonds_karp",
+    srcs = ["boost_edmonds_karp.cpp"],
+    hdrs = [
+        "boost_edmonds_karp.h",
+    ],
+    includes = ["."],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/graph",
+        "@boost.graph",
+    ],
+)
+
+cc_library(
+    name = "boost_push_relabel",
+    srcs = ["boost_push_relabel.cpp"],
+    hdrs = [
+        "boost_push_relabel.h",
+    ],
+    includes = ["."],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//src/graph",
+        "@boost.graph",
+    ],
+)
+
+cc_binary(
+    name = "bipartite_matching",
+    srcs = ["main.cpp"],
+    includes = ["."],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":boost_edmonds_karp",
+        ":boost_push_relabel",
+        ":dinic",
+        ":edmonds_karp",
+        ":hocroft_karp",
+        "//src/bipartite_matching/generators",
+        "//src/graph",
+        "@google_benchmark//:benchmark",
+    ],
+)
